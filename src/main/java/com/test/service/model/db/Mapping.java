@@ -1,6 +1,6 @@
-package com.test.service.model.config;
+package com.test.service.model.db;
 
-public class MappingConfig {
+public class Mapping {
     private String id;
     private String username;
     private String name;

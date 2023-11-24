@@ -1,7 +1,7 @@
 package com.test.service.config;
 
-import com.test.service.model.config.DataSourceConfig;
-import com.test.service.model.config.MappingConfig;
+import com.test.service.model.db.DataSource;
+import com.test.service.model.db.Mapping;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.InputStream;
@@ -11,7 +11,7 @@ import java.util.List;
 
 public class DataSourceReader {
 
-    private static List<DataSourceConfig> dataSources;
+    private static List<DataSource> dataSources;
 
     private static void readYaml(String yamlFileName) {
         Yaml yaml = new Yaml();
@@ -19,11 +19,11 @@ public class DataSourceReader {
                 .getClassLoader()
                 .getResourceAsStream("ds.yaml");
         Object loadedObject = yaml.load(inputStream);
-        if(loadedObject instanceof LinkedHashMap) {
+        if (loadedObject instanceof LinkedHashMap) {
             LinkedHashMap<String, ArrayList<LinkedHashMap>> map = (LinkedHashMap<String, ArrayList<LinkedHashMap>>) loadedObject;
             ArrayList<LinkedHashMap> list = map.get("data-sources");
             for (LinkedHashMap dataSourceMap : list) {
-                DataSourceConfig dataSource = new DataSourceConfig();
+                DataSource dataSource = new DataSource();
                 dataSource.setName((String) dataSourceMap.get("name"));
                 dataSource.setStrategy((String) dataSourceMap.get("strategy"));
                 dataSource.setUrl((String) dataSourceMap.get("url"));
@@ -31,7 +31,7 @@ public class DataSourceReader {
                 dataSource.setUser((String) dataSourceMap.get("user"));
                 dataSource.setPassword((String) dataSourceMap.get("password"));
                 LinkedHashMap mappingMap = (LinkedHashMap) dataSourceMap.get("mapping");
-                MappingConfig mapping = new MappingConfig();
+                Mapping mapping = new Mapping();
                 mapping.setId((String) mappingMap.get("id"));
                 mapping.setUsername((String) mappingMap.get("username"));
                 mapping.setName((String) mappingMap.get("name"));
@@ -42,7 +42,7 @@ public class DataSourceReader {
         }
     }
 
-    public static List<DataSourceConfig> getDataSources() {
+    public static List<DataSource> getDataSources() {
         if (dataSources == null) {
             dataSources = new ArrayList<>();
             readYaml("ds.yaml");

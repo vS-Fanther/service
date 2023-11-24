@@ -2,7 +2,7 @@ data-sources:
   - name: db1
     strategy: postgres
     url: jdbc:postgresql://localhost:5432/db1
-    table: users
+    table: users_t
     user: testuser1
     password: testpass1
     mapping:

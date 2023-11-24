@@ -1,13 +1,13 @@
-package com.test.service.model.config;
+package com.test.service.model.db;
 
-public class DataSourceConfig {
+public class DataSource {
     private String name;
     private String strategy;
     private String url;
     private String table;
     private String user;
     private String password;
-    private MappingConfig mapping;
+    private Mapping mapping;
 
     public String getName() {
         return name;
@@ -57,11 +57,11 @@ public class DataSourceConfig {
         this.password = password;
     }
 
-    public MappingConfig getMapping() {
+    public Mapping getMapping() {
         return mapping;
     }
 
-    public void setMapping(MappingConfig mapping) {
+    public void setMapping(Mapping mapping) {
         this.mapping = mapping;
     }
 }
