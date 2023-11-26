@@ -1,6 +1,6 @@
 package com.test.service.model.db;
 
-public class DataSource {
+public class InnerDataSource {
     private String name;
     private String strategy;
     private String url;

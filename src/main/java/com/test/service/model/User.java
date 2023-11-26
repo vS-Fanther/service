@@ -37,4 +37,40 @@ public class User {
     public void setSurname(String surname) {
         this.surname = surname;
     }
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static class Builder {
+        private User user;
+
+        private Builder() {
+            this.user = new User();
+        }
+
+        public Builder id(String id) {
+            user.id = id;
+            return this;
+        }
+
+        public Builder name(String name) {
+            user.name = name;
+            return this;
+        }
+
+        public Builder username(String username) {
+            user.username = username;
+            return this;
+        }
+
+        public Builder surname(String surname) {
+            user.surname = surname;
+            return this;
+        }
+
+        public User build() {
+            return user;
+        }
+    }
 }
