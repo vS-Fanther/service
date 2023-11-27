@@ -22,7 +22,7 @@ public class DataSourceConfigImpl implements DataSourceConfig {
 
     private void initDataSources() {
         dataSources = new ArrayList<>();
-        innerDataSources = readYaml("ds.yaml");
+        innerDataSources = readYaml();
         for (InnerDataSource innerDataSourcesConfig : innerDataSources) {
             DriverManagerDataSource dataSource = new DriverManagerDataSource();
             dataSource.setDriverClassName("org.postgresql.Driver");
@@ -41,7 +41,7 @@ public class DataSourceConfigImpl implements DataSourceConfig {
         return templates;
     }
 
-    private List<InnerDataSource> readYaml(String yamlFileName) {
+    private List<InnerDataSource> readYaml() {
         Yaml yaml = new Yaml();
         InputStream inputStream = DataSourceConfigImpl.class
                 .getClassLoader()

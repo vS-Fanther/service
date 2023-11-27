@@ -21,6 +21,14 @@ public class UserController {
         this.dbService = dbService;
     }
 
+    /**
+     *
+     * @param id filtering by id. Not required
+     * @param name filtering by name. Not required
+     * @param username filtering by username. Not required
+     * @param surname filtering by surname. Not required
+     * @return List of found users from DB
+     */
     @GetMapping
     public List<User> getAllUsers(@RequestParam(value = "id", required = false) String id,
                                   @RequestParam(value = "name", required = false) String name,
