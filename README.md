@@ -13,12 +13,12 @@ Follow these steps to run the service:
    ```
 
 2. **Install dependencies:**
-   ```bash
+   ```
    mvn clean install
    ```
 
 3. **Run the service:**
-   ```bash
+   ```
    mvn spring-boot:run
    ```
 
@@ -32,8 +32,6 @@ The service provides a REST API for executing queries to databases. Example requ
 
 Get all users:
 
-bash
-Copy code
 curl -X GET http://localhost:8080/users
 Get user by ID:
 ```
