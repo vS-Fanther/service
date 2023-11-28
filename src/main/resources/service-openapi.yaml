@@ -1,0 +1,55 @@
+openapi: "3.0.3"
+info:
+  title: "service API"
+  description: "service API"
+  version: "1.0.0"
+servers:
+  - url: "http://localhost:8080"
+paths:
+  /users:
+    get:
+      summary: "GET users"
+      operationId: "getAllUsers"
+      parameters:
+        - name: "id"
+          in: "query"
+          required: false
+          schema:
+            type: "string"
+        - name: "name"
+          in: "query"
+          required: false
+          schema:
+            type: "string"
+        - name: "username"
+          in: "query"
+          required: false
+          schema:
+            type: "string"
+        - name: "surname"
+          in: "query"
+          required: false
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/User"
+components:
+  schemas:
+    User:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        name:
+          type: "string"
+        username:
+          type: "string"
+        surname:
+          type: "string"

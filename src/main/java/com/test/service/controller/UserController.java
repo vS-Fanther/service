@@ -22,19 +22,26 @@ public class UserController {
     }
 
     /**
+     * Retrieves a list of users from the database based on optional filtering criteria.
      *
-     * @param id filtering by id. Not required
-     * @param name filtering by name. Not required
-     * @param username filtering by username. Not required
-     * @param surname filtering by surname. Not required
-     * @return List of found users from DB
+     * @param id       Optional: Filter users by ID.
+     * @param name     Optional: Filter users by name.
+     * @param username Optional: Filter users by username.
+     * @param surname  Optional: Filter users by surname.
+     * @return List of users matching the specified criteria.
      */
     @GetMapping
     public List<User> getAllUsers(@RequestParam(value = "id", required = false) String id,
                                   @RequestParam(value = "name", required = false) String name,
                                   @RequestParam(value = "username", required = false) String username,
                                   @RequestParam(value = "surname", required = false) String surname) {
-        User requestUser = User.builder().id(id).name(name).surname(surname).username(username).build();
+        User requestUser = User
+                .builder()
+                .id(id)
+                .name(name)
+                .surname(surname)
+                .username(username)
+                .build();
         return dbService.findAllUsers(requestUser);
     }
 }
