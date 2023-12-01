@@ -8,11 +8,8 @@ import com.test.service.service.DBService;
 import com.test.service.service.SQLBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +17,7 @@ import java.util.List;
 public class DBServiceImpl implements DBService {
 
     DataSourceConfig dataSourceConfig;
+    SQLBuilder sqlBuilder = new SQLBuilder();
 
     @Autowired
     public DBServiceImpl(DataSourceConfig dataSourceConfig) {
@@ -29,24 +27,20 @@ public class DBServiceImpl implements DBService {
     public List<User> findAllUsers(User user) {
         List<JdbcTemplate> templates = dataSourceConfig.getTemplates();
         List<InnerDataSource> innerDataSourcesConfigs = dataSourceConfig.getInnerDataSources();
-
         int i = 0;
         List<User> result = new ArrayList<>();
-
+        List<String> params;
         for (JdbcTemplate jdbcTemplate : templates) {
-            String sql = "SELECT * FROM " + innerDataSourcesConfigs.get(i).getTable();
+            params = new ArrayList<>();
             Mapping mapping = innerDataSourcesConfigs.get(i).getMapping();
-            String resultSQL = SQLBuilder.buildSQL(sql, user, mapping);
-            result.addAll(jdbcTemplate.query(resultSQL, new RowMapper<User>() {
-                @Override
-                public User mapRow(ResultSet rs, int rowNum) throws SQLException {
-                    User user = new User();
-                    user.setId(rs.getString(mapping.getId()));
-                    user.setName(rs.getString(mapping.getName()));
-                    user.setSurname(rs.getString(mapping.getSurname()));
-                    user.setUsername(rs.getString(mapping.getUsername()));
-                    return user;
-                }
+            String resultSQL = sqlBuilder.buildSQL(innerDataSourcesConfigs.get(i).getTable(), user, mapping, params);
+            result.addAll(jdbcTemplate.query(resultSQL, params.toArray(), (rs, rowNum) -> {
+                User user1 = new User();
+                user1.setId(rs.getString(mapping.getId()));
+                user1.setName(rs.getString(mapping.getName()));
+                user1.setSurname(rs.getString(mapping.getSurname()));
+                user1.setUsername(rs.getString(mapping.getUsername()));
+                return user1;
             }));
             i++;
         }

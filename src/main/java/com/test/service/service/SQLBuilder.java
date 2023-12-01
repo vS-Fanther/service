@@ -3,34 +3,38 @@ package com.test.service.service;
 import com.test.service.model.User;
 import com.test.service.model.db.Mapping;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SQLBuilder {
 
-    private static boolean isSQLContainsWhere = false;
-
-    public static String buildSQL(String sql, User user, Mapping mapping) {
-        String result = sql;
-        if (user.getSurname() != null) {
-            result += addCondition(mapping.getSurname(), result, user.getSurname());
+    public String buildSQL(String tableName, User user, Mapping mapping, List<String> params) {
+        StringBuilder sql = new StringBuilder("SELECT * FROM ").append(tableName);
+        if (user.getId() != null) {
+            appendCondition(sql, mapping.getId());
+            params.add(user.getId());
         }
         if (user.getName() != null) {
-            result += addCondition(mapping.getName(), result, user.getName());
-        }
-        if (user.getId() != null) {
-            result += addCondition(mapping.getId(), result, user.getId());
+            appendCondition(sql, mapping.getName());
+            params.add(user.getName());
         }
         if (user.getUsername() != null) {
-            result += addCondition(mapping.getUsername(), result, user.getUsername());
+            appendCondition(sql, mapping.getUsername());
+            params.add(user.getUsername());
         }
-        isSQLContainsWhere = false;
-        return result;
+        if (user.getSurname() != null) {
+            appendCondition(sql, mapping.getSurname());
+            params.add(user.getSurname());
+        }
+        return sql.toString();
     }
 
-    private static String addCondition(String field, String sql, String value) {
-        if (!isSQLContainsWhere) {
-            isSQLContainsWhere = true;
-            return (" WHERE " + field + " = '" + value + "'");
+    private void appendCondition(StringBuilder sql, String field) {
+        if (sql.indexOf("WHERE") == -1) {
+            sql.append(" WHERE ");
         } else {
-            return (" AND " + field + " = '" + value + "'");
+            sql.append(" AND ");
         }
+        sql.append(field).append(" = ?");
     }
 }

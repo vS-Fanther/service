@@ -33,12 +33,11 @@ public class DataSourceConfigImpl implements DataSourceConfig {
         }
     }
 
-    private List<JdbcTemplate> initJdbcTemplates(List<DataSource> dataSources) {
+    private void initJdbcTemplates(List<DataSource> dataSources) {
         templates = new ArrayList<>();
         for (DataSource dataSource : dataSources) {
             templates.add(new JdbcTemplate(dataSource));
         }
-        return templates;
     }
 
     private List<InnerDataSource> readYaml() {
