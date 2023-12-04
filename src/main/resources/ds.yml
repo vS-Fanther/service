@@ -1,0 +1,24 @@
+data-sources:
+  dataSources:
+    - name: db1
+      strategy: postgres
+      url: jdbc:postgresql://localhost:5432/db1
+      table: users_t
+      user: testuser1
+      password: testpass1
+      mapping:
+        id: user_id
+        username: login
+        name: first_name
+        surname: last_name
+    - name: db2
+      strategy: postgres
+      url: jdbc:postgresql://localhost:5432/db2
+      table: user_table
+      user: testuser2
+      password: testpass2
+      mapping:
+        id: ldap_login
+        username: ldap_login
+        name: name
+        surname: surname
