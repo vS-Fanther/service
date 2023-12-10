@@ -2,7 +2,7 @@ package com.test.service.config.configImpl;
 
 import com.test.service.config.yml.reader.DataSourceProperties;
 import com.test.service.config.JDBCTemplateConfig;
-import com.test.service.model.db.InnerDataSource;
+import com.test.service.db.model.InnerDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.jdbc.core.JdbcTemplate;

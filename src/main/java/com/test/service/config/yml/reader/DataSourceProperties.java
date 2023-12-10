@@ -1,6 +1,6 @@
 package com.test.service.config.yml.reader;
 
-import com.test.service.model.db.InnerDataSource;
+import com.test.service.db.model.InnerDataSource;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;

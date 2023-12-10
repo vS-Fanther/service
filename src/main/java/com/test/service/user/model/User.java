@@ -1,4 +1,4 @@
-package com.test.service.model;
+package com.test.service.user.model;
 
 public class User {
     private String id;

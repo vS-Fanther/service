@@ -1,4 +1,4 @@
-package com.test.service.model.db;
+package com.test.service.db.model;
 
 public class InnerDataSource {
     private String name;
