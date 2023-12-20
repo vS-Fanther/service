@@ -8,7 +8,7 @@ Follow these steps to run the service:
 
 1. **Clone the repository:**
     ```
-   git clone https://github.com/your-username/database-service.git
+   git clone https://github.com/vS_Fanther/service.git
    cd database-service
    ```
 
